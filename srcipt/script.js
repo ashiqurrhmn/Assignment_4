@@ -1,5 +1,6 @@
 let interviewList = [];
 let rejectedList = [];
+let currentStatus = "ALL";
 
 let total = document.getElementById("total-count");
 let interview = document.getElementById("interview-count");
@@ -32,6 +33,7 @@ function toggleStyle(id) {
   rejectedBtn.classList.add("bg-white", "text-[#64748B]");
 
   const selectedBtn = document.getElementById(id);
+  currentStatus = id;
 
   selectedBtn.classList.remove("bg-white", "text-[#64748B]");
   selectedBtn.classList.add("bg-blue-500", "text-white");
@@ -39,6 +41,7 @@ function toggleStyle(id) {
   if(id == "interview-btn") {
     allCards.classList.add("hidden");
     filteredSection.classList.remove("hidden");
+    renderInterview();
 }
 else if(id == "all-btn") {
   allCards.classList.remove("hidden");
@@ -47,6 +50,7 @@ else if(id == "all-btn") {
 else if(id == "rejected-btn") {
   allCards.classList.add("hidden");
   filteredSection.classList.remove("hidden");
+  renderRejected();
 }
 };
 
@@ -73,12 +77,14 @@ mainContainer.addEventListener("click", function (event) {
   
   if (!existingCard) {
     interviewList.push(cardInfo);
-    
   }
-
     rejectedList = rejectedList.filter((item) => item.jobName != cardInfo.jobName);
+    if(currentStatus == "rejected-btn") {
+      renderRejected();
+    }
+
   count();
-  renderInterview();
+  
   
 }
 else if (event.target.classList.contains("rejected-btn")) {
@@ -106,10 +112,11 @@ else if (event.target.classList.contains("rejected-btn")) {
     
   }
   interviewList = interviewList.filter((item) => item.jobName != cardInfo.jobName);
+  if(currentStatus == "interview-btn") {
+    renderInterview();
+  }
 
   count();
-  renderRejected();
-  
 }
 });
 
