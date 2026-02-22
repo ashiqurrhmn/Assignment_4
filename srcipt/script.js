@@ -83,7 +83,9 @@ mainContainer.addEventListener("click", function (event) {
     const time = parent.querySelector(".time").innerText;
     const status = parent.querySelector(".status-name").innerText;
     const description = parent.querySelector(".description").innerText;
-    parent.querySelector(".status-name").innerText = "INTERVIEW";
+    const statusEl = parent.querySelector(".status-name");
+    statusEl.innerText = "INTERVIEW";
+    statusEl.classList.add("text-green-600");
 
     const cardInfo = {
       jobName,
@@ -114,7 +116,10 @@ mainContainer.addEventListener("click", function (event) {
     const time = parent.querySelector(".time").innerText;
     const status = parent.querySelector(".status-name").innerText;
     const description = parent.querySelector(".description").innerText;
-    parent.querySelector(".status-name").innerText = "REJECTED";
+    const statusEl = parent.querySelector(".status-name");
+
+    statusEl.innerText = "REJECTED";
+    statusEl.classList.add("text-red-700", "border-red-700");
 
     const cardInfo = {
       jobName,
@@ -184,7 +189,7 @@ function renderInterview() {
               ${interview.time}
             </p>
             <p
-              class="status-name bg-slate-200 text-[14px] font-medium w-27 text-center rounded-[4px] p-1"
+              class="status-name bg-slate-200 text-green-600 text-[14px] font-medium w-27 text-center rounded-[4px] p-1"
             >
                 ${interview.status}
             </p>
@@ -228,7 +233,7 @@ function renderRejected() {
               ${rejected.time}
             </p>
             <p
-              class="status-name bg-slate-200 text-[14px] font-medium w-27 text-center rounded-[4px] p-1"
+              class="status-name bg-slate-200 text-red-700 text-[14px] font-medium w-27 text-center rounded-[4px] p-1"
             >
                 ${rejected.status}
             </p>
