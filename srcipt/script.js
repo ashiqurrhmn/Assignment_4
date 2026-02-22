@@ -16,14 +16,22 @@ const interviewBtn = document.getElementById("interview-btn");
 const rejectedBtn = document.getElementById("rejected-btn");
 
 function count() {
-  total.innerText = allCards.children.length;
-  availableJobs.innerText = `${allCards.children.length} jobs`;
+  const totalJobs = allCards.children.length;
+  total.innerText = totalJobs;
   interview.innerText = interviewList.length;
   rejected.innerText = rejectedList.length;
 
   if (currentStatus === "ALL") {
+    availableJobs.innerText = `${totalJobs} jobs`;
+  } else if (currentStatus === "interview-btn") {
+    availableJobs.innerText = `${interviewList.length} of ${totalJobs} jobs`;
+  } else if (currentStatus === "rejected-btn") {
+    availableJobs.innerText = `${rejectedList.length} of ${totalJobs} jobs`;
+  }
+
+  if (currentStatus === "ALL") {
     const noJobEl = document.getElementById("no-job");
-    if (allCards.children.length > 0) {
+    if (totalJobs > 0) {
       noJobEl.classList.add("hidden");
     } else {
       noJobEl.classList.remove("hidden");
@@ -50,7 +58,9 @@ function toggleStyle(id) {
   if (id == "interview-btn") {
     allCards.classList.add("hidden");
     filteredSection.classList.remove("hidden");
+    currentStatus = id;
     renderInterview();
+    count();
   } else if (id == "all-btn") {
     allCards.classList.remove("hidden");
     filteredSection.classList.add("hidden");
@@ -59,7 +69,9 @@ function toggleStyle(id) {
   } else if (id == "rejected-btn") {
     allCards.classList.add("hidden");
     filteredSection.classList.remove("hidden");
+    currentStatus = id;
     renderRejected();
+    count();
   }
 };
 
