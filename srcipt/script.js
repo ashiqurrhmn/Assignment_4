@@ -20,7 +20,16 @@ function count() {
   availableJobs.innerText = `${allCards.children.length} jobs`;
   interview.innerText = interviewList.length;
   rejected.innerText = rejectedList.length;
-}
+
+  if (currentStatus === "ALL") {
+    const noJobEl = document.getElementById("no-job");
+    if (allCards.children.length > 0) {
+      noJobEl.classList.add("hidden");
+    } else {
+      noJobEl.classList.remove("hidden");
+    }
+  }
+};
 count();
 
 function toggleStyle(id) {
@@ -45,12 +54,14 @@ function toggleStyle(id) {
   } else if (id == "all-btn") {
     allCards.classList.remove("hidden");
     filteredSection.classList.add("hidden");
+    currentStatus = "ALL";
+    count();
   } else if (id == "rejected-btn") {
     allCards.classList.add("hidden");
     filteredSection.classList.remove("hidden");
     renderRejected();
   }
-}
+};
 
 mainContainer.addEventListener("click", function (event) {
   if (event.target.classList.contains("interview-btn")) {
