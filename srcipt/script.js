@@ -37,7 +37,7 @@ function count() {
       noJobEl.classList.remove("hidden");
     }
   }
-};
+}
 count();
 
 function toggleStyle(id) {
@@ -73,7 +73,7 @@ function toggleStyle(id) {
     renderRejected();
     count();
   }
-};
+}
 
 mainContainer.addEventListener("click", function (event) {
   if (event.target.classList.contains("interview-btn")) {
@@ -126,7 +126,7 @@ mainContainer.addEventListener("click", function (event) {
     const existingCard = rejectedList.find(
       (item) => item.jobName == cardInfo.jobName,
     );
-  
+
     if (!existingCard) {
       rejectedList.push(cardInfo);
     }
@@ -138,34 +138,29 @@ mainContainer.addEventListener("click", function (event) {
     }
 
     count();
-  }
-  else if(event.target.closest(".delete-btn")){
+  } else if (event.target.closest(".delete-btn")) {
     const card = event.target.closest(".mt-4");
     const jobName = card.querySelector(".job-name").innerText;
 
-    interviewList = interviewList.filter(
-      (item) => item.jobName != jobName,
-    );
-    rejectedList = rejectedList.filter(
-      (item) => item.jobName != jobName,
-    );
+    interviewList = interviewList.filter((item) => item.jobName != jobName);
+    rejectedList = rejectedList.filter((item) => item.jobName != jobName);
 
     const allCardsList = allCards.querySelectorAll(".mt-4");
     allCardsList.forEach((item) => {
-        const name = item.querySelector(".job-name").innerText;
-        if(name === jobName){
-            item.remove();
-        }
+      const name = item.querySelector(".job-name").innerText;
+      if (name === jobName) {
+        item.remove();
+      }
     });
 
-    if(currentStatus === "interview-btn"){
-        renderInterview();
-    }   
-    else if(currentStatus === "rejected-btn"){      
-        renderRejected();
+    if (currentStatus === "interview-btn") {
+      renderInterview();
+    } else if (currentStatus === "rejected-btn") {
+      renderRejected();
     }
     count();
-}});
+  }
+});
 
 function renderInterview() {
   filteredSection.innerHTML = "";
